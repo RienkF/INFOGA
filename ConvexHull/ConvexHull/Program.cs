@@ -78,7 +78,7 @@ IEnumerable<Point> GrahamScan(IEnumerable<Point> points)
 
         bool done = false;
 
-        while (!done || lower.Count() < 3)
+        while (!done && lower.Count() > 2)
         {
             IEnumerable<Point> last3Points = lower.TakeLast(3).ToList();
 
@@ -88,7 +88,7 @@ IEnumerable<Point> GrahamScan(IEnumerable<Point> points)
 
             // https://math.stackexchange.com/questions/1324179/how-to-tell-if-3-connected-points-are-connected-clockwise-or-counter-clockwise 
             // Second answer, check if counterclockwise, but strictly
-            if (b.X * a.Y + c.X * b.Y + a.X * c.Y <= a.X * b.Y + b.X * c.Y + c.X * a.Y)
+            if (b.X * a.Y + c.X * b.Y + a.X * c.Y < a.X * b.Y + b.X * c.Y + c.X * a.Y)
                 lower = lower.Except(new List<Point> { b }).ToList();
             else done = true;
         }
@@ -102,7 +102,7 @@ IEnumerable<Point> GrahamScan(IEnumerable<Point> points)
 
         bool done = false;
 
-        while (!done || upper.Count() < 3)
+        while (!done && upper.Count() > 2)
         {
             IEnumerable<Point> last3Points = upper.TakeLast(3).ToList();
 
