@@ -102,7 +102,7 @@ IEnumerable<Point> GrahamScan(IEnumerable<Point> points)
 
         bool done = false;
 
-        while (!done || lower.Count() < 3)
+        while (!done || upper.Count() < 3)
         {
             IEnumerable<Point> last3Points = upper.TakeLast(3).ToList();
 
